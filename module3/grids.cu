@@ -1,3 +1,12 @@
+// Module 3 - Practical Activities - 2/1/2026
+// Student: Herbert Schmidmeier
+//
+// Modify the grids.cu CUDA code, in the module3 folder in the course git project,
+// to execute at least 5 different numbers of threads, with various block sizes, numbers of blocks,
+// and grid dimensions.
+
+
+
 #include <stdio.h>
 
 __global__ void what_is_my_id_2d_A(
@@ -48,13 +57,25 @@ unsigned int cpu_block_dimy[ARRAY_SIZE_Y][ARRAY_SIZE_X];
 
 int main(void)
 {
-	/* Total thread count = 32 * 4 = 128 */
+	// Total thread count = 32 * 4 = 128
 	const dim3 threads_rect(32,4);
 	const dim3 blocks_rect(1,4);
 
-	/* Total thread count = 16 * 8 = 128 */
-	const dim3 threads_square(16, 8); /* 16 * 8 */
+	// Total thread count = 16 * 8 = 128
+	const dim3 threads_square(16, 8); // 16 * 8 
 	const dim3 blocks_square(2,2);
+
+	// Total thread count = 64 * 4 = 256
+	const dim3 threads_rect2(64,4);
+	const dim3 blocks_rect2(1,2);
+
+	// Total thread count = 8 * 4 = 32
+	const dim3 threads_square2(8, 4); 
+	const dim3 blocks_square2(4,4);
+
+	// Total thread count = 32 * 16 = 512
+	const dim3 threads_square3(32, 16);
+	const dim3 blocks_square3(1,1);
 
 	/* Needed to wait for a character at exit */
 	char ch;
@@ -85,13 +106,13 @@ int main(void)
 	cudaMalloc((void **)&gpu_grid_dimy, ARRAY_SIZE_IN_BYTES);
 	cudaMalloc((void **)&gpu_block_dimy, ARRAY_SIZE_IN_BYTES);
 
-	for( int kernel= 0; kernel < 2; kernel++)
+	for( int kernel= 0; kernel < 5; kernel++)
 	{
 		switch(kernel)
 		{
-			case 0:
+			case 0: //
 			{
-				/* Execute our kernel */
+				// Execute our kernel - threads_rect(32,4) & blocks_rect(1,4)
 				what_is_my_id_2d_A<<<blocks_rect, threads_rect>>>(gpu_block_x, gpu_block_y,
 	gpu_thread, gpu_calc_thread, gpu_xthread, gpu_ythread, gpu_grid_dimx, gpu_block_dimx,
 	gpu_grid_dimy, gpu_block_dimy);
@@ -99,7 +120,31 @@ int main(void)
 
 			case 1:
 			{
-				/* Execute our kernel */
+				// Execute our kernel - threads_square(16, 8) & blocks_square(2,2)
+				what_is_my_id_2d_A<<<blocks_square, threads_square>>>(gpu_block_x, gpu_block_y,
+	gpu_thread, gpu_calc_thread, gpu_xthread, gpu_ythread, gpu_grid_dimx, gpu_block_dimx,
+	gpu_grid_dimy, gpu_block_dimy);
+			} break;
+
+			case 2:
+			{
+				// Execute our kernel - threads_rect2(64, 4) & blocks_rect2(1,2)
+				what_is_my_id_2d_A<<<blocks_square, threads_square>>>(gpu_block_x, gpu_block_y,
+	gpu_thread, gpu_calc_thread, gpu_xthread, gpu_ythread, gpu_grid_dimx, gpu_block_dimx,
+	gpu_grid_dimy, gpu_block_dimy);
+			} break;
+
+			case 3:
+			{
+				// Execute our kernel - threads_square2(8, 4) & blocks_square2(4,4)
+				what_is_my_id_2d_A<<<blocks_square, threads_square>>>(gpu_block_x, gpu_block_y,
+	gpu_thread, gpu_calc_thread, gpu_xthread, gpu_ythread, gpu_grid_dimx, gpu_block_dimx,
+	gpu_grid_dimy, gpu_block_dimy);
+			} break;
+
+			case 4:
+			{
+				// Execute our kernel - threads_square3(32, 16) & blocks_square3(1,1)
 				what_is_my_id_2d_A<<<blocks_square, threads_square>>>(gpu_block_x, gpu_block_y,
 	gpu_thread, gpu_calc_thread, gpu_xthread, gpu_ythread, gpu_grid_dimx, gpu_block_dimx,
 	gpu_grid_dimy, gpu_block_dimy);
