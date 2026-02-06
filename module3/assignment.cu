@@ -94,8 +94,8 @@ int main(int argc, char** argv)
     int m = 5000;
     int n = 5000;
 
-    int totalThreads = (1 << 20); // default: 1M
-    int blockSize    = 256;       // default
+    int totalThreads = 1000000; // default: 1M total threads
+    int blockSize    = 256;       // default 256 threads per block
 
     if (argc >= 2) {  // Read total threads from command line
         totalThreads = std::atoi(argv[1]);
