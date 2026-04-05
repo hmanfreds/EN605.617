@@ -1,0 +1,28 @@
+{
+  "testing_image_original": {
+    "base_path": "pratt_fom/original",
+    "original_images": [
+      "img_testing_1.bmp",
+      "img_testing_2.bmp"
+    ]
+  },
+  "testing_image_noisy": {
+    "base_path": "pratt_fom/noisy"
+  },
+  "testing_image_gt": {
+    "base_path": "pratt_fom/gt",
+    "groud_truth_images": [
+      "img_testing_1_gt.bmp",
+      "img_testing_2_gt.bmp"
+    ]
+  },
+  "testing_image_converted": {
+    "base_path": "pratt_fom/converted"
+  },
+  "image_repo": {
+    "base_path": "img_repo"
+  },
+  "image_edges": {
+    "base_path": "img_edges"
+  }
+}
